@@ -11,7 +11,8 @@ function operate (first,oper,second) {     // when pressing a standard operand, 
 };
 
 function updateDisplay(text) {
-    document.getElementById('display').textContent = text;
+    text = Math.round(text* 1e8) / 1e8;   //round to 8 decimal places 
+    document.getElementById('display').textContent = text;  //display the new number
 };
 
 function clickNumber(buttonId) {
@@ -51,7 +52,7 @@ function clickOperand(buttonId) {
     };
     if (buttonId==='equals') {       //if equals operand
         if (parseFloat(secondNum)===0 && operand ==='divide') {
-            updateDisplay("🖕 cleared 🖕");
+            updateDisplay("🖕  🖕");
             firstNum = ''; operand = ''; secondNum = '';
             return;
         }
@@ -73,7 +74,7 @@ function clickOperand(buttonId) {
         }       
         else {                  //if secondNumber is NOT blank then perform operation
             if (parseFloat(secondNum)===0 && operand ==='divide') {
-                updateDisplay("🖕 cleared 🖕");
+                updateDisplay("🖕  🖕");
                 firstNum = ''; operand = ''; secondNum = '';
                 return;
             }

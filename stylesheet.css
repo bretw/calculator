@@ -17,7 +17,7 @@
 .display {
     width: 100%;
     text-align: end;
-    font-size: 6vh;
+    font-size: 100%;
     box-sizing: border-box;
     border-bottom: 2vh solid black;
     background-color: #f0f0f0;
@@ -26,6 +26,7 @@
     border-radius: 2vh;
     overflow: hidden;
     font-family: 'Orbitron', sans-serif; 
+    font-size: 200%;
 }
 
 button {
