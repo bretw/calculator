@@ -7,28 +7,34 @@
     border: 1vh solid black;
     margin-top: 10vh;
     flex-wrap: wrap;
-    border-radius: 10px;
+    border-radius: 5vh;
     justify-content: space-around;
+    padding: 1vh;
+
 }
 
 .display {
     width: 100%;
     text-align: end;
-    font-size: 8vh;
+    font-size: 5vh;
     box-sizing: border-box;
     border-bottom: 2vh solid black;
     background-color: #f0f0f0;
     height: 10vh;
+    padding-right: 1vh;
+    border-radius: 2vh;
+    overflow: hidden;
 }
 
-.button {
+button {
     justify-content: center;
-    flex: 0 0 calc(25% - 5px);
+    flex: 0 0 calc(25% - .2vh);
     width: 10vh;
     height: 10vh;
     margin: 0.1vh;
     font-size: 4vh;
-    border-radius: 1vh;
+    border-radius: 2vh;
+    
 }
 
 .buttons {
@@ -37,4 +43,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     max-height: 100%;
+}
+
+.buttons button:hover {
+    background-color: orange;
 }
