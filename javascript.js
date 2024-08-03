@@ -14,7 +14,7 @@ function updateDisplay(text) {
     if (text === "🖕 cleared 🖕" || text === ".") {
         document.getElementById('display').textContent = text; //display the special text or dot
     } else {
-        document.getElementById('display').textContent = parseFloat(text).toFixed(6).replace(/\.?0+$/, ""); //round to 6 decimal places and remove trailing zeros
+        document.getElementById('display').textContent = parseFloat(text).toFixed(5).replace(/\.?0+$/, ""); //round to 6 decimal places and remove trailing zeros
     }
 };
 function clickNumber(buttonId) {
