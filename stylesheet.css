@@ -3,20 +3,21 @@
     margin: auto;
     flex-direction: row;
     width: 50vh;
-    height: 51vh;
+    height: 61vh;
     border: 1vh solid black;
     margin-top: 10vh;
     flex-wrap: wrap;
     border-radius: 5vh;
     justify-content: space-around;
     padding: 1vh;
+    background-color: gray;
 
 }
 
 .display {
     width: 100%;
     text-align: end;
-    font-size: 5vh;
+    font-size: 6vh;
     box-sizing: border-box;
     border-bottom: 2vh solid black;
     background-color: #f0f0f0;
@@ -24,6 +25,7 @@
     padding-right: 1vh;
     border-radius: 2vh;
     overflow: hidden;
+    font-family: 'Orbitron', sans-serif; 
 }
 
 button {
@@ -34,8 +36,19 @@ button {
     margin: 0.1vh;
     font-size: 4vh;
     border-radius: 2vh;
-    
+    border-width: 1.5vh;
 }
+
+#clear {    justify-content: center;
+    flex: 0 0 calc(100% - .2vh);
+    width: 20vh;
+    height: 10vh;
+    margin: 0.1vh;
+    font-size: 4vh;
+    border-radius: 2vh;
+
+}
+
 
 .buttons {
     display: flex;

@@ -1,58 +1,34 @@
-function add (a, b) {
-    return a + b;
-};
-
-function subtract (a, b) {
-    return a - b;
-};
-
-function multiply (a, b) {
-    return a * b;
-};
-
-function divide (a, b) {
-    return a / b;
-    
-};
-function operate (first,oper,second) {  
-    console.log(`${firstNum} ${operand} ${secondNum}` );
-    console.log(oper);
-    console.log(oper==='subtract');
+function operate (first,oper,second) {     // when pressing a standard operand, calculate
     if (oper === 'add') {
-        console.log(`${firstNum} + ${operand} + ${secondNum}` );
-        return add(first,second);
-    }
+        return ((a, b) => parseFloat(a) + parseFloat(b))(first, second);  }
         else if (oper === 'subtract') {
-        console.log(`${firstNum} + ${operand} + ${secondNum}` );
-        return subtract(first,second);
-    }
+            return ((a, b) => a - b)(first, second);  }
     else if (oper === 'multiply') {
-        console.log(`${firstNum} + ${operand} + ${secondNum}` );
-        return multiply(first,second);
-    }
+        return ((a, b) => a * b)(first, second);  }
     else if (oper === 'divide') {
-        console.log(`${firstNum} + ${operand} + ${secondNum}` );
-        return divide(first,second);
-    }
+        return ((a, b) => a / b)(first, second);  }
     else return null;
 };
 
 function updateDisplay(text) {
     document.getElementById('display').textContent = text;
 };
-function checkforDot (string) {
-string.includes('.');
-}
+
 function clickNumber(buttonId) {
+    if (firstNum === null) {               //in case of nulls set them to not
+        firstNum = '';
+    };
+    if (secondNum === null) {
+        secondNum = '';}
     if (operand === '') {  //when you are on the first number concat to the first number variable
-        if (firstNum.includes('.')) {
+        if (firstNum.toString().includes('.') && buttonId==='.') {
             return;
         }
         firstNum = firstNum + buttonId;
         updateDisplay(firstNum);
     }
     else {                  // else concat to the second number variable
-        if (secondNum.includes('.')) {
+        if (secondNum.includes('.') && buttonId==='.') {
             return;
         }
         secondNum = secondNum + buttonId;
@@ -61,55 +37,62 @@ function clickNumber(buttonId) {
 };
 
 function clickOperand(buttonId) {
-    if (firstNum === null) {
+    if (firstNum === null) {               //in case of nulls set them to not
         firstNum = '';
     };
     if (secondNum === null) {
         secondNum = '';
     };
-    console.log(`${firstNum} ${operand} ${secondNum}` );
+    if (buttonId==='clear') {
+        firstNum = ''; secondNum = ''; operand = '';
+        updateDisplay('cleared');
+        return;
+       
+    };
     if (buttonId==='equals') {       //if equals operand
-        console.log(`${firstNum} ${operand} ${secondNum}` );
+        if (parseFloat(secondNum)===0 && operand ==='divide') {
+            updateDisplay("🖕 cleared 🖕");
+            firstNum = ''; operand = ''; secondNum = '';
+            return;
+        }
         if (secondNum==='' ) {          //if there is no second number to do a function against just return the first Number
-            console.log(`${firstNum} ${operand} ${secondNum}` );
             return;
         }
         else {                          // if there is a second number perform the calculation, make the result hte firstNum
             firstNum = operate(firstNum, operand, secondNum);
-            console.log(`${firstNum} ${operand} ${secondNum}` );
             operand = '';            // now that firstNumber is the calculated result, get rid of the operand and secondnum
             secondNum ='';
             updateDisplay(firstNum);   //display the new firstNum on screen
-            console.log(`${firstNum} ${operand} ${secondNum}` );
             return;
         }
     }
     else {                      // if not equals operand
         if (secondNum==='')  {  //if secondNumber is blank then just modify operand 
             operand = buttonId;
-            console.log(`${firstNum} ${operand} ${secondNum}` );
             return;
         }       
         else {                  //if secondNumber is NOT blank then perform operation
+            if (parseFloat(secondNum)===0 && operand ==='divide') {
+                updateDisplay("🖕 cleared 🖕");
+                firstNum = ''; operand = ''; secondNum = '';
+                return;
+            }
             firstNum = operate(firstNum,operand,secondNum);  // make firstnum the original operand calculation not input
             operand = buttonId;                          //add the operand so now we have firstNum and Operand 
             updateDisplay(firstNum);
-            console.log(`${firstNum} ${operand} ${secondNum}` );
+            secondNum = '';
             return;
         }
     }
 };
 
-let firstNum = '';
-let secondNum = '';
-let operand = '';
-let display = '';
+let firstNum = ''; let secondNum= ''; let operand= ''; let display = '';  //initialize variables
 
-document.querySelector('.buttons').addEventListener('click', function(event) {
+document.querySelector('.buttons').addEventListener('click', function(event) {   //do stuff on click
     if (event.target && event.target.tagName === 'BUTTON') {
         const buttonId = event.target.id;
         const buttonClass= event.target.className;
-
+   
         switch(buttonClass) {
             case 'number':
                 // Function for numbers
@@ -117,10 +100,10 @@ document.querySelector('.buttons').addEventListener('click', function(event) {
                 break;
             case 'operand':
                 // Function for operands
+
                 clickOperand(buttonId);
                 break;
             default:
                 console.log('No matching button');
-                console.log(buttonClass + ' ' + buttonId)
         }
     }});
