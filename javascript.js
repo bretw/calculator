@@ -11,10 +11,12 @@ function operate (first,oper,second) {     // when pressing a standard operand, 
 };
 
 function updateDisplay(text) {
-    text = Math.round(text* 1e8) / 1e8;   //round to 8 decimal places 
-    document.getElementById('display').textContent = text;  //display the new number
+    if (text === "🖕 cleared 🖕" || text === ".") {
+        document.getElementById('display').textContent = text; //display the special text or dot
+    } else {
+        document.getElementById('display').textContent = parseFloat(text).toFixed(6).replace(/\.?0+$/, ""); //round to 6 decimal places and remove trailing zeros
+    }
 };
-
 function clickNumber(buttonId) {
     if (firstNum === null) {               //in case of nulls set them to not
         firstNum = '';
@@ -52,13 +54,14 @@ function clickOperand(buttonId) {
     };
     if (buttonId==='equals') {       //if equals operand
         if (parseFloat(secondNum)===0 && operand ==='divide') {
-            updateDisplay("🖕  🖕");
+            updateDisplay("🖕 cleared 🖕");
             firstNum = ''; operand = ''; secondNum = '';
             return;
         }
         if (secondNum==='' ) {          //if there is no second number to do a function against just return the first Number
             return;
         }
+        if (firstNum === '') {return;} 
         else {                          // if there is a second number perform the calculation, make the result hte firstNum
             firstNum = operate(firstNum, operand, secondNum);
             operand = '';            // now that firstNumber is the calculated result, get rid of the operand and secondnum
@@ -74,7 +77,7 @@ function clickOperand(buttonId) {
         }       
         else {                  //if secondNumber is NOT blank then perform operation
             if (parseFloat(secondNum)===0 && operand ==='divide') {
-                updateDisplay("🖕  🖕");
+                updateDisplay("🖕 cleared 🖕");
                 firstNum = ''; operand = ''; secondNum = '';
                 return;
             }
@@ -101,7 +104,8 @@ document.querySelector('.buttons').addEventListener('click', function(event) {  
                 break;
             case 'operand':
                 // Function for operands
-
+                if (firstNum === '') {return;}    //no operation if theres no first number
+                console.log('you made it here2');
                 clickOperand(buttonId);
                 break;
             default:
